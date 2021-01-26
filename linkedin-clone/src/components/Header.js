@@ -9,8 +9,17 @@ import SmsOutlinedIcon from '@material-ui/icons/SmsOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
+import { auth } from '../firebase';
+import { useDispatch } from 'react-redux';
 
 function Header() {
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(logout());
+        auth.signOut();
+    }
+
     return (
         <div className="header">
             <div className="header__left">
@@ -32,7 +41,8 @@ function Header() {
                 <HeaderOption 
                     avatar='https://media-exp1.licdn.com/dms/image/C4D03AQHcanQH7MZ6SQ/profile-displayphoto-shrink_100_100/0/1590049661007?e=1617235200&v=beta&t=3O3JgksbrCGbYFGqaHgTe_Y5Nk1bu_eGO3STpqJ77s8' 
                     /*More={ExpandMoreOutlinedIcon} */
-                    title="Me"/>
+                    title="Me"
+                    onClick={logout}/>
             </div>
             
         </div>

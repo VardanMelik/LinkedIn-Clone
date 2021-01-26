@@ -9,6 +9,7 @@ import CalendarViewDayOutlinedIcon from '@material-ui/icons/CalendarViewDayOutli
 import Post from './Post';
 import { db } from '../firebase';
 import firebase from 'firebase';
+import FlipMove from 'react-flip-move';
 
 
 function Feed() {
@@ -30,10 +31,10 @@ function Feed() {
         e.preventDefault();
 
         db.collection('posts').add({
-            name: 'Vardan Melik',
-            description: 'This is test',
-            message: input,
-            photoUrl: '',
+            name: posts.name,
+            description: posts.description,
+            message: posts.message,
+            photoUrl: posts.photoUrl,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         console.log('Before')
@@ -82,6 +83,7 @@ function Feed() {
                     />
                 </div>
             </div>
+            <FlipMove>
             {
                 posts.map( ({ 
                     id, data: 
@@ -96,6 +98,7 @@ function Feed() {
                     />
                 ))
             }
+            </FlipMove>
             {/*<Post
                 name="Vardan Melik"
                 description="This is a LinkedIn 1st post"
