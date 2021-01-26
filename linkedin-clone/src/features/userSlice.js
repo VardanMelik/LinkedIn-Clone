@@ -6,27 +6,20 @@ export const userSlice = createSlice({
     value: 0,
   },
   reducers: {
-    increment: state => {
-      
-      state.value += 1;
+    
+    login: (state, action) => {
+      state.value = action.payload;
     },
-    decrement: state => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+
+    logout: (state) => {
+      state.user = null;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 
-export const incrementAsync = amount => dispatch => {
-  setTimeout(() => {
-    dispatch(incrementByAmount(amount));
-  }, 1000);
-};
-
+// Selectors
 export const selectUser = state => state.user.value;
 
 export default userSlice.reducer;
