@@ -15,8 +15,9 @@ function Feed() {
     const [input, setInput] = useState('');
     const [posts, setPosts] = useState([]);
     
+    // Order By Daye/timestamo .orderBy('timestamp', 'desc')
     useEffect( () => {
-        db.collection("posts").onSnapshot( (snapshot) => 
+        db.collection("posts").orderBy('timestamp', 'desc').onSnapshot( (snapshot) => 
             setPosts(
                 snapshot.docs.map( (doc) => ({
                     id: doc.id,
@@ -48,7 +49,8 @@ function Feed() {
                     <CreateIcon />
                     <form>
                         <input 
-                        type="text" 
+                            value={input}
+                            type="text" 
                             onChange={ e => setInput(e.target.value)} />
                         <button onClick={sendPost} type="submit">Send</button>
                     </form>
@@ -81,7 +83,10 @@ function Feed() {
                 </div>
             </div>
             {
-                posts.map( ({ id, data: {name, description, message, photoUrl}}) => (
+                posts.map( ({ 
+                    id, data: 
+                    {name, description, message, photoUrl}
+                    }) => (
                     <Post
                         key={id}
                         name={name}
